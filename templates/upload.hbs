@@ -1,0 +1,17 @@
+<!doctype html public "⚓ ⚓ ⚓">
+<meta charset=utf8>
+<h2>Upload Successful</h2>
+<dl>
+  <dt>url:
+    <dd><a href={{url}}>{{url}}</a>
+  <dt>name:
+    <dd>{{name}}
+  <dt>type:
+    <dd>{{type}}
+  <dt>size:
+    <dd>{{size}}
+  {{#if url}}
+  <dt>image:
+    <dd><a href={{url}}><img src={{url}} alt={{name}}></a>
+  {{/if}}
+</dl>

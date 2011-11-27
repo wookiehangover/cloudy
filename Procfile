@@ -1,1 +1,1 @@
-web: ./bin/cloudy
+web: node lib/index.js

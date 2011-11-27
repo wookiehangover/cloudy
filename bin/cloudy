@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+var
+  strata = require('strata'),
+  app    = require('../lib/app');
+
+strata.run(app, { port: process.env.port || 9001 });

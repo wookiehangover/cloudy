@@ -7,11 +7,11 @@
     "url": ""
   },
   "main": "./lib/index.js",
-  "bin": { "cloudy": "./bin/cloudy" },
   "engines": {
     "node": "~0.6.2"
   },
   "dependencies": {
-    "strata": "~0.8.2"
+    "strata": "~0.8.2",
+    "handlebars": "1.0.2beta"
   }
 }

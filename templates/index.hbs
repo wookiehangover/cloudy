@@ -1,11 +1,15 @@
 <!doctype html public "⚓ ⚓ ⚓">
 <meta charset=utf8>
 <title>☁</title>
-<form action=/upload method=post enctype="multipart/form-data">
+<link rel=stylesheet href=css/style.css>
+
+<form action=/upload method=post enctype="multipart/form-data" class="upload-form">
+  <label for=photo>Upload:</label>
   <input name=photo type=file>
   <input type=submit value=Upload>
 </form>
-<ul id=images></ul>
+
+<ul id=images class=image-list></ul>
 
 <script>window.s3_bucket_url = '//{{url}}';</script>
 

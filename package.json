@@ -16,5 +16,10 @@
     "knox": "~0.0.9",
     "request": "~2.2.5",
     "xml2js": "~0.1.12"
+  },
+  "devDependencies": {
+    "handlebars-jst": "~0.0.3",
+    "stitch": "~0.3.2",
+    "uglify-js": "~1.1.1"
   }
 }

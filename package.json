@@ -11,7 +11,7 @@
     "node": "~0.6.2"
   },
   "dependencies": {
-    "strata": "~0.8.2",
+    "strata": "git://github.com/wookiehangover/strata.git#v0.8.2patch",
     "handlebars": "1.0.2beta",
     "knox": "~0.0.9",
     "request": "~2.2.5",

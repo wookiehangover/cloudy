@@ -67,22 +67,87 @@ td { vertical-align: top; }
    ========================================================================== */
 
 
-.upload-form { background: #333; padding: 20px; color: #000; }
+body {background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAHElEQVQYV2NkIA5IMhKnjmFUId6AAgePJDFhCQDDFAEFxaHDgAAAAABJRU5ErkJggg==);}
+
+#main > header {  }
+.upload-form { padding: 10px; margin-bottom: 20px; color: #fff;
+background: -moz-linear-gradient(top,  rgba(125,126,125,0.68) 0%, hsla(0,0%,0%,0.7) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,0.68)), color-stop(100%,hsla(0,0%,0%,0.7)));
+background: -webkit-linear-gradient(top,  rgba(125,126,125,0.68) 0%,hsla(0,0%,0%,0.7) 100%);
+background: -o-linear-gradient(top,  rgba(125,126,125,0.68) 0%,hsla(0,0%,0%,0.7) 100%);
+background: -ms-linear-gradient(top,  rgba(125,126,125,0.68) 0%,hsla(0,0%,0%,0.7) 100%);
+background: linear-gradient(top,  rgba(125,126,125,0.68) 0%,hsla(0,0%,0%,0.7) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ad7d7e7d', endColorstr='#0e0e0e',GradientType=0 );
+  
+}
 .upload-form label { font-size: 20px; font-weight: bold; padding-right: 20px; }
 
 .image-list { list-style-type: none; margin:0 ;}
-.image-list li { float:left; margin: 0; overflow:hidden;  }
-.image-list li img { width: 300px; }
+.image-list li { float:left; margin: 0; overflow:hidden; background: hsla(0, 0%, 10%, 0.20); min-width: 200px; min-height: 200px; text-align:center; position: relative;}
+.image-list li img { width: 300px;
+
+  -webkit-transition: all 1s ease-out;  
+     -moz-transition: all 1s ease-out;  
+      -ms-transition: all 1s ease-out;  
+       -o-transition: all 1s ease-out;  
+          transition: all 1s ease-out;
+
+}
+.image-list li img.ui-hidden { display:none; position: absolute; top:0 ; left: 0; }
+
+.image-list li a:hover img { opacity: 0.7; }
+.image-list li a:hover img.ui-hidden { display: block; opacity: 1;}
+.image-list li a:hover canvas { opacity: 0; }
+
+#loader { width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: rgba(255, 255, 255, 0.8); z-index: 9001; }
+#loader h1 { width: 100%; text-align: center; position: fixed; top: 49%; }
 
 
+/**** Isotope Filtering ****/
 
+.isotope-item {
+  z-index: 2;
+}
 
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
 
+/**** Isotope CSS3 transitions ****/
 
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
 
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
 
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+       -o-transition-property:         top, left, opacity;
+          transition-property:         transform, opacity;
+}
 
+/**** disabling Isotope CSS3 transitions ****/
 
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
 
 /* ==|== non-semantic helper classes ======================================== */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }

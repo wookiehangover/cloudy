@@ -3,13 +3,22 @@
 <title>☁</title>
 <link rel=stylesheet href=css/style.css>
 
-<form action=/upload method=post enctype="multipart/form-data" class="upload-form">
-  <label for=photo>Upload:</label>
-  <input name=photo type=file>
-  <input type=submit value=Upload>
-</form>
+<div id=main role=main>
+  <header>
+    <form action=/upload method=post enctype="multipart/form-data" class="upload-form">
+      <label for=photo>Upload:</label>
+      <input name=photo type=file>
+      <input type=submit value=Upload>
+      <a href="#" id="filter-gifs">gifs</a>
+    </form>
+  </header>
 
-<ul id=images class=image-list></ul>
+  <ul id=images class=image-list></ul>
+</div>
+
+<div id=loader>
+  <h1>Loading...</h1>
+</div>
 
 <script>window.s3_bucket_url = '//{{url}}';</script>
 

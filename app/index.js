@@ -1,2 +1,2 @@
-require('lib/setup');
+require('lib/namespace');
 require('lib/image');

@@ -1,5 +1,6 @@
 (function( global ) {
-  this.Cloudy = {
+  "use strict";
+  global.Cloudy = {
     module: function() {
       // Internal module cache.
       var modules = {};
@@ -25,5 +26,5 @@
     return global.s3_bucket_url + '/' + url;
   });
 
-  module.exports = this.Cloudy;
+  module.exports = global.Cloudy;
 })(this);

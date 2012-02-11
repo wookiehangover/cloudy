@@ -8,18 +8,21 @@
   },
   "main": "./lib/index.js",
   "engines": {
-    "node": "~0.6.2"
+    "node": ">=0.4.7 <0.7.0",
+    "npm": ">=1.0.0"
   },
   "dependencies": {
-    "strata": "https://s3.amazonaws.com/wookie-buildpack/strata-v0.8.2patch.tar.gz",
+    "strata": "*",
     "handlebars": "1.0.2beta",
     "knox": "~0.0.9",
     "request": "~2.2.5",
     "xml2js": "~0.1.12"
   },
   "devDependencies": {
-    "handlebars-jst": "~0.0.3",
-    "stitch": "~0.3.2",
-    "uglify-js": "~1.1.1"
+    "grunt":            "~0.2.15",
+    "handlebars-jst":   "~0.0.4",
+    "handlebars":       "1.0.2beta",
+    "stitch":           "~0.3.3",
+    "clean-css":        "~0.3.2"
   }
 }

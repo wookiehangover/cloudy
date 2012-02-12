@@ -19,7 +19,9 @@
           Controllers: {}
         };
       };
-    }()
+    }(),
+
+    app: _.extend({}, Backbone.Events)
   };
 
   Handlebars.registerHelper('url', function( url ){

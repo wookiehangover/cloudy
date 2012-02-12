@@ -14,11 +14,11 @@ app.use( strata.contentType );
 app.use( strata.file, 'assets' );
 
 // Routes
-router.get( '/', routes.index );
-
 router.get( '/list', routes.list );
 
 router.post( '/upload', routes.upload );
+
+router.get( '/*', routes.index );
 
 // Initialize App
 app.run( router );

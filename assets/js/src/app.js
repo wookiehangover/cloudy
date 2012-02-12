@@ -48,8 +48,73 @@
     };
   }
   return this.require.define;
-}).call(this)({"index": function(exports, require, module) {require('lib/namespace');
-require('lib/image');
+}).call(this)({"index": function(exports, require, module) {var
+  app = require('lib/namespace'),
+  image = require('lib/image');
+
+
+function loadImages( cb ){
+  app.images.deferred.done(function(){
+    $.when( app.images.dfds ).done(function(){
+      var images = $('#images').isotope({ filter: '' });
+      $('#loader').fadeOut(800);
+      if( $.isFunction( cb ) ) return cb( images );
+    });
+  });
+}
+
+// Defining the application router, you can attach sub routers here.
+var Router = Backbone.Router.extend({
+  routes: {
+    '': 'index',
+    'gifs': 'gifs'
+  },
+
+  index: function() {
+    loadImages();
+  },
+
+  gifs: function(){
+    loadImages(function( images ){
+      setTimeout(function(){
+        images.isotope({ filter: '.gif' });
+      }, 100);
+    });
+  }
+
+});
+
+app.init = function(){
+  this.images = new image.Collection();
+  this.router = new Router();
+
+  Backbone.history.start({ pushState: true });
+};
+
+
+jQuery(function($) {
+  app.init();
+
+  $(document).on("click", "a:not([data-bypass])", function(evt) {
+    // Get the anchor href and protcol
+    var href = $(this).attr("href");
+    var protocol = this.protocol + "//";
+
+    // Ensure the protocol is not part of URL, meaning its relative.
+    if (href && href.slice(0, protocol.length) !== protocol) {
+      // Stop the default event to ensure the link will not cause a page
+      // refresh.
+      evt.preventDefault();
+
+      // This uses the default router defined above, and not any routers
+      // that may be placed in modules.  To have this work globally (at the
+      // cost of losing all route events) you can change the following line
+      // to: Backbone.history.navigate(href, true);
+      app.router.navigate(href, true);
+    }
+  });
+
+});
 }, "lib/image": function(exports, require, module) {/*jshint onevar: false */
 (function( Image, $ ) {
 
@@ -59,7 +124,8 @@ require('lib/image');
     parent: $('#images'),
 
     initialize: function(){
-
+      var dfd = this.dfd = new $.Deferred();
+      this.model.collection.dfds.push( dfd );
     },
 
     render: function(){
@@ -73,14 +139,15 @@ require('lib/image');
       img.imagesLoaded(function(){
         // detect for gifs
         if( /(?=\.gif)/.test( _this.model.get('Key') ) )
+          _this.$el.addClass('gif');
           _this.processGif( img );
+
+        _this.dfd.resolve();
 
       });
     },
 
     processGif: function( img ){
-
-      this.$el.addClass('gif');
 
       var params = {
         width: img.width(),
@@ -113,24 +180,12 @@ require('lib/image');
       this.deferred = this.fetch();
     },
 
-    model: Image.Model
+    model: Image.Model,
+
+    dfds: []
   });
 
-  var collection = Image.collection = new Image.Collection();
-
-  collection.deferred.done(function(){
-
-    $('#images').isotope({
-      itemSelector : 'li'
-    });
-
-    $('#loader').delay(200).fadeOut(800);
-
-    $('#filter-gifs').click(function(){
-      $('#images').isotope({ filter: '.gif' });
-      return false;
-    });
-  });
+  module.exports = Image;
 
 })( this.Cloudy.module('image'), jQuery );
 }, "lib/namespace": function(exports, require, module) {(function( global ) {
@@ -154,7 +209,9 @@ require('lib/image');
           Controllers: {}
         };
       };
-    }()
+    }(),
+
+    app: _.extend({}, Backbone.Events)
   };
 
   Handlebars.registerHelper('url', function( url ){

@@ -7,7 +7,8 @@
     parent: $('#images'),
 
     initialize: function(){
-
+      var dfd = this.dfd = new $.Deferred();
+      this.model.collection.dfds.push( dfd );
     },
 
     render: function(){
@@ -21,14 +22,15 @@
       img.imagesLoaded(function(){
         // detect for gifs
         if( /(?=\.gif)/.test( _this.model.get('Key') ) )
+          _this.$el.addClass('gif');
           _this.processGif( img );
+
+        _this.dfd.resolve();
 
       });
     },
 
     processGif: function( img ){
-
-      this.$el.addClass('gif');
 
       var params = {
         width: img.width(),
@@ -61,23 +63,11 @@
       this.deferred = this.fetch();
     },
 
-    model: Image.Model
+    model: Image.Model,
+
+    dfds: []
   });
 
-  var collection = Image.collection = new Image.Collection();
-
-  collection.deferred.done(function(){
-
-    $('#images').isotope({
-      itemSelector : 'li'
-    });
-
-    $('#loader').delay(200).fadeOut(800);
-
-    $('#filter-gifs').click(function(){
-      $('#images').isotope({ filter: '.gif' });
-      return false;
-    });
-  });
+  module.exports = Image;
 
 })( this.Cloudy.module('image'), jQuery );
